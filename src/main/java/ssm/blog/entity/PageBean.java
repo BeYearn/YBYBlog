@@ -9,24 +9,23 @@ import java.util.Map;
  */
 public class PageBean<T> {
 
-    private int currPage;   //当前页数
+    private int currPage;   //当前页数(第几页)
     private int pageSize;   //每页显示的个数
     private long total;      //总记录数
     private int start;
     private int end;
     private List<T> result; //分页查询的结果
-    private Map<String,Object> map = new HashMap<String,Object>();   //查询条件
+    private Map<String, Object> map = new HashMap<String, Object>();   //查询条件
 
 
-    PageBean(){
-
+    PageBean() {
     }
 
     public PageBean(int currPage, int pageSize) {
         this.currPage = currPage;
         this.pageSize = pageSize;
-        this.start = (currPage-1)*pageSize;
-        this.end = currPage*pageSize;
+        this.start = (currPage - 1) * pageSize;
+        this.end = currPage * pageSize;
     }
 
     public int getCurrPage() {

@@ -50,8 +50,9 @@ public interface BlogTypeDao {
     /**
      * 分页查询博客类别信息
      *          - 两个参数分别是 start 与 end 其中对应 sql语句中的 limit start,end.
-                - 在我们分页中 start对应的(page-1)✖pageSize ,end对应的是page✖pageSize
-
+                - 在我们分页中 start对应的(page-1)✖pageSize ,end对应的是 pageSize
+     SELECT * form 表名 WHERE 条件 limit 5,10; //检索6-15条数据
+     如: select * from xxtable limit 10,5   #第三页,每页显示五条
      - 由于是两个参数 无法使用parameterType 但是mybatis给我们提供了两种方法
         1 封装成Map对象
         2使用@Param(value=”name”)注解 默认value=可以省略也就是这样子 @Param(“name”)在这里我使用@Param注解 这样我们在mapper文件中就可以直接通过#{name}获取参数中的值
