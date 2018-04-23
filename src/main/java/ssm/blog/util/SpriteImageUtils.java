@@ -18,8 +18,6 @@ import java.util.*;
 /**
  * 1. 这里抠出的body身体周围没有像素,紧贴左上  但模板图有一定像素而且模板xml是从1,1开始的
  * 2. 看到部分只有一半的是因为扣除的图并不是完全把周边多余的都干掉(ps自动裁切发现原图有点问题)
- *
- *
  */
 
 
@@ -43,19 +41,24 @@ public class SpriteImageUtils {
                 String name = allPartNameList.get(i);
                 String name2 = allPartNameList.get(j);
 
-                if (name.contains("LWing")) {
-                    if (name2.contains("RWing") && name.replace("LWing", "").equals(name2.replace("RWing", ""))) {
-                        allPartNameList.remove(i);
-                        allPartNameList.remove(j);
+                if (name.contains("+") || name2.contains("+")) {  //避免循环+连接
+                    continue;
+                }
+
+                if (name.equals(name2)) {  //避免同名的+
+                    continue;
+                }
+
+                if (name.contains("Wing") && name2.contains("Wing") || name.contains("Eye") && name2.contains("Eye")) {
+                    String[] split = name.split("_");
+                    String[] split1 = name2.split("_");
+                    if ((split[0] + split[2]).equals(split1[0] + split1[2])) {
+                        allPartNameList.remove(name);
+                        allPartNameList.remove(name2);
                         allPartNameList.add(name + "+" + name2);
-                    }
-                } else if (name.contains("LEye")) {
-                    if (name2.contains("REye") && name.replace("LEye", "").equals(name2.replace("REye", ""))) {
-                        allPartNameList.add(name + "+" + name2);
-                        allPartNameList.remove(i);
-                        allPartNameList.remove(j);
                     }
                 }
+
             }
         }
         return allPartNameList;
@@ -147,22 +150,33 @@ public class SpriteImageUtils {
         StringBuilder nameBuiler = new StringBuilder();
         //按照上面那个顺序生成对应名字
         for (String f : names) {
-            String justName = f.split("\\.")[0];   //干掉 后缀
-            String justNameSimple = justName.substring(7);//干掉 160/ FB_
+
+            String justName = null;
+            //为了左右部件连起来的那种
+            if (f.contains("+")) {
+                justName = f.split("\\+")[0].split("\\.")[0];
+            } else {
+                justName = f.split("\\.")[0];   //干掉 后缀
+            }
+            String justNameSimple = justName.substring(7);//干掉 160/    FB_
 
             String justNameSimple2 = "";
             if (justNameSimple.contains("Back")) {
                 justNameSimple2 = justNameSimple.replace("Back", "ba");
             } else if (justNameSimple.contains("Body")) {
                 justNameSimple2 = justNameSimple.replace("Body", "bo");
-            } else if (justNameSimple.contains("Eye")) {
-                justNameSimple2 = justNameSimple.replace("Eye", "e");
+            } else if (justNameSimple.contains("LEye")) {
+                justNameSimple2 = justNameSimple.replace("LEye", "e");
+            } else if (justNameSimple.contains("REye")) {
+                justNameSimple2 = justNameSimple.replace("REye", "e");
             } else if (justNameSimple.contains("Smeller")) {
                 justNameSimple2 = justNameSimple.replace("Smeller", "s");
             } else if (justNameSimple.contains("Tail")) {
                 justNameSimple2 = justNameSimple.replace("Tail", "t");
-            } else if (justNameSimple.contains("Wing")) {
-                justNameSimple2 = justNameSimple.replace("Wing", "w");
+            } else if (justNameSimple.contains("LWing")) {
+                justNameSimple2 = justNameSimple.replace("LWing", "w");
+            } else if (justNameSimple.contains("RWing")) {
+                justNameSimple2 = justNameSimple.replace("RWing", "w");
             }
             nameBuiler.append(justNameSimple2).append("-");
         }
