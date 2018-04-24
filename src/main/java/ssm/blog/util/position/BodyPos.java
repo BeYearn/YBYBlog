@@ -8,7 +8,7 @@ public class BodyPos implements Position {
     @Override
     public Point calculate(int enclosingWidth, int enclosingHeight, int width, int height, int insetLeft, int insetRight, int insetTop, int insetBottom) {
 
-        int x = 1;
+        int x = 17;    //身体左边有16像素的空白
         int y = 1;
         return new Point(x, y);
     }

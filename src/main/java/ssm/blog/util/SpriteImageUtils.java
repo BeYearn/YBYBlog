@@ -124,7 +124,7 @@ public class SpriteImageUtils {
                                     dealwithName(framMap, name4);
                                     dealwithName(framMap, name5);
                                     dealwithName(framMap, name6);
-                                    getSpriteImage("E:\\SpriteOut\\" + generateName(color, name1, name2, name3, name4, name5, name6), framMap);
+                                    getSpriteImage("D:\\SpriteOut\\" + generateName(color, name1, name2, name3, name4, name5, name6), framMap);
                                 }
                             }
                         }
@@ -225,9 +225,13 @@ public class SpriteImageUtils {
             } else if (entry.getKey().contains("Tail")) {
                 position = new TailPos();
             }
-            finalSpriteBuilder.watermark(position, entry.getValue(), 1.0f);
+            try {
+                finalSpriteBuilder.watermark(position, entry.getValue(), 1.0f);
+            } catch (Exception e) {
+                System.out.println(entry.getKey());
+                throw e;
+            }
         }
-
         finalSpriteBuilder.toFile(outputName);
     }
 
@@ -252,7 +256,7 @@ public class SpriteImageUtils {
     static HashMap<String, PartFrame> plistMap;
 
     /**
-     * 现将plist这个xml的信息对应起来
+     * 现将plist这个xml的信息对应起来(干掉下面两个dic的)
      * key---dict
      */
     public static void arrangePlist() {
@@ -288,7 +292,92 @@ public class SpriteImageUtils {
         try {
             arrangePlist();
             ArrayList<String> allNames = mergeBothpartName();
-            startCompoud(allNames);
+
+
+            final ArrayList<String> B_Namelist = new ArrayList<>();
+            final ArrayList<String> P_Namelist = new ArrayList<>();
+            final ArrayList<String> W_Namelist = new ArrayList<>();
+            final ArrayList<String> G_Namelist = new ArrayList<>();
+            final ArrayList<String> R_Namelist = new ArrayList<>();
+            final ArrayList<String> Y_Namelist = new ArrayList<>();
+            for (String name : allNames) {
+                if (name.contains("FB")) {
+                    B_Namelist.add(name);
+                } else if (name.contains("FP")) {
+                    P_Namelist.add(name);
+                } else if (name.contains("FW")) {
+                    W_Namelist.add(name);
+                } else if (name.contains("FG")) {
+                    G_Namelist.add(name);
+                } else if (name.contains("FR")) {
+                    R_Namelist.add(name);
+                } else if (name.contains("FY")) {
+                    Y_Namelist.add(name);
+                }
+            }
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        startCompoud(B_Namelist);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).run();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        startCompoud(P_Namelist);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).run();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        startCompoud(W_Namelist);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).run();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        startCompoud(G_Namelist);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).run();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        startCompoud(R_Namelist);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).run();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        startCompoud(Y_Namelist);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).run();
+
+
+            //startCompoud(allNames);
         } catch (Exception e) {
             e.printStackTrace();
         }
