@@ -5,6 +5,11 @@
          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID" version="3.0">
 
+
+    <welcome-file-list>
+        <welcome-file>admin/main.jsp</welcome-file>
+    </welcome-file-list>
+
     <!--spring配置文件路径-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -14,6 +19,9 @@
     <!-- 配置spring监听器-->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>ssm.blog.listener.InitBloggerDataListener</listener-class>
     </listener>
 
     <!--spring mvc核心servlet-->
@@ -25,7 +33,7 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath:spring-mvc.xml</param-value>
         </init-param>
-        <load-on-startup>1</load-on-startup>
+        <load-on-startup>1</load-on-startup>  <!--当值为0或者大于0时，表示容器在应用启动时就加载这个servlet  正值越小优先级越高-->
         <async-supported>true</async-supported>
     </servlet>
     <servlet-mapping>

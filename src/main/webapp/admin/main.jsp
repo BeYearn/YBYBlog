@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>个人博客后台管理</title>
+    <title>博客后台管理</title>
     <%@include file="./common/head.jspf" %>
     <style type="text/css">
         body {
@@ -136,8 +136,7 @@
         </div>
     </div>
 </div>
-<div id="dlg" class="easyui-dialog" style="width:400px; height:200px; padding:10px 20px"
-     closed="true" buttons="#dlg-buttons">
+<div id="dlg" class="easyui-dialog" style="width:400px; height:200px; padding:10px 20px" closed="true" buttons="#dlg-buttons">
     <form id="fm" method="post">
         <table cellspacing="8px">
             <tr>
@@ -177,7 +176,7 @@
     </div>
 </div>
 <div region="south" style="height: 25px;padding: 5px" align="center">
-    Copyright © 2012-2017 熊平的SSM博客系统 版权所有
+    Copyright ©   YBY的SSM博客系统
 </div>
 </body>
 </html>

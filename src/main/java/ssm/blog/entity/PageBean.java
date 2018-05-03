@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public class PageBean<T> {
 
-    private int currPage;   //当前页数(第几页)
+    private int currPage;   //当前页数
     private int pageSize;   //每页显示的个数
     private long total;      //总记录数
     private int start;
