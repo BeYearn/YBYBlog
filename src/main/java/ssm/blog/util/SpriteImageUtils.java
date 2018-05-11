@@ -148,9 +148,10 @@ public class SpriteImageUtils {
 
     public static String generateName(String color, String... names) {
         StringBuilder nameBuiler = new StringBuilder();
+
+        ArrayList<String> nameList = new ArrayList<>();
         //按照上面那个顺序生成对应名字
         for (String f : names) {
-
             String justName = null;
             //为了左右部件连起来的那种
             if (f.contains("+")) {
@@ -178,8 +179,16 @@ public class SpriteImageUtils {
             } else if (justNameSimple.contains("RWing")) {
                 justNameSimple2 = justNameSimple.replace("RWing", "w");
             }
-            nameBuiler.append(justNameSimple2).append("-");
+
+            nameList.add(justNameSimple2);
         }
+
+        Collections.sort(nameList);//对名字排一个固定顺序
+
+        for (String name : nameList) {
+            nameBuiler.append(name).append("-");
+        }
+
         String name = nameBuiler.toString();
         return color + "-" + name.substring(0, name.length() - 1) + ".png";
     }
