@@ -9,7 +9,7 @@ public class WingLPos implements Position {
     public Point calculate(int enclosingWidth, int enclosingHeight, int width, int height, int insetLeft, int insetRight, int insetTop, int insetBottom) {
 
         int x = 179;
-        int y = 72;
+        int y = 74;
         return new Point(x, y);
     }
 }

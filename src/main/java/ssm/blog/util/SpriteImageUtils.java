@@ -324,6 +324,12 @@ public class SpriteImageUtils {
                     Y_Namelist.add(name);
                 }
             }
+
+            File outDir = new File("D:\\SpriteOut");
+            if(!outDir.exists()){
+                outDir.mkdirs();
+            }
+
             new Thread(new Runnable() {
                 @Override
                 public void run() {
